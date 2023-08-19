@@ -1,5 +1,5 @@
 # Proyecto Escala de Grises en C# - Readme
-
+# [![Imagen.png](https://i.postimg.cc/CKY6bHfz/Imagen.png)](https://postimg.cc/CRPNg87g)
 Este repositorio contiene un proyecto en C# que implementa una interfaz gráfica para convertir imágenes a escala de grises. La conversión a escala de grises implica transformar una imagen a una versión en blanco y negro, donde los colores se representan en diferentes tonos de gris según su intensidad.
 
 ## Características
