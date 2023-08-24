@@ -12,6 +12,11 @@ namespace EscaladeGrises
             InitializeComponent();
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -38,11 +43,12 @@ namespace EscaladeGrises
         private void button2_Click(object sender, EventArgs e)
         {
             int w = myPic.Width , h= myPic.Height;
-            //Este bucle recorre cada pixel del bitmap
+            
             Color actual1, actual2, actual3, newC1, newC2, newC3;
             final1 = new Bitmap(w, h);
             final2 = new Bitmap(w, h);
             final3 = new Bitmap(w, h);
+            //Este bucle recorre cada pixel del bitmap
             for (int x = 0; x < w; x++)
             {
                 for (int y = 0; y < h; y++)
@@ -56,14 +62,14 @@ namespace EscaladeGrises
 
                     //Segundo picbox
                     actual2 = myPic.GetPixel(x, y);
-                    int Hsl = ((actual1.R + actual1.G + actual1.B) / 3);
+                    int Hsl = ((actual2.R + actual2.G + actual2.B) / 3);
                     newC2 = Color.FromArgb(Hsl, Hsl, Hsl);
                     final2.SetPixel(x, y, newC2);
 
 
                     //Tercero picbox
                     actual3 = myPic.GetPixel(x, y);
-                    double  Luminosity = 0.299* (actual3.R) + 0.587*(actual3.G) + 0.114*(actual3.B);
+                    double  Luminosity = (0.299* (actual3.R) + 0.587*(actual3.G) + 0.114*(actual3.B));
                     int intValue = (int)Luminosity;//We get a parse 
                     newC3 = Color.FromArgb(intValue, intValue, intValue);
                     final3.SetPixel(x, y, newC3);
@@ -71,8 +77,8 @@ namespace EscaladeGrises
 
             }
             pictureBox2.Image = final1;//primer picture box
-            pictureBox3.Image = final2;
-            pictureBox4.Image = final3;
+            pictureBox3.Image = final2;//segundo picture box
+            pictureBox4.Image = final3;//tercero picture box
 
         }
 
