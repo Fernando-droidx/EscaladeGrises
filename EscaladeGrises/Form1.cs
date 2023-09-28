@@ -17,6 +17,51 @@ namespace EscaladeGrises
 
         }
 
+        public static Bitmap ConvertToLBP(Bitmap grayImage)
+    {
+        
+        int neighborhoodSize = 3;
+
+        
+        Bitmap lbpImage = new Bitmap(grayImage.Width - 2, grayImage.Height - 2);
+
+        for (int y = 1; y < grayImage.Height - 1; y++)
+        {
+            for (int x = 1; x < grayImage.Width - 1; x++)
+            {
+                byte centerPixelValue = grayImage.GetPixel(x, y).R;
+                int pattern = 0;
+
+               
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    for (int dx = -1; dx <= 1; dx++)
+                    {
+                        if (dx == 0 && dy == 0)
+                            continue;
+
+                        byte neighborPixelValue = grayImage.GetPixel(x + dx, y + dy).R;
+                        if (neighborPixelValue >= centerPixelValue)
+                            pattern = (pattern << 1) | 1;
+                        else
+                            pattern = (pattern << 1);
+                    }
+                }
+
+             
+                lbpImage.SetPixel(x - 1, y - 1, Color.FromArgb(pattern, pattern, pattern));
+            }
+        }
+
+        return lbpImage;
+    }
+
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -76,9 +121,19 @@ namespace EscaladeGrises
                 }
 
             }
+            
+
+            // Mostrar la imagen LBP en pictureBox1
+           
             pictureBox2.Image = final1;//primer picture box
             pictureBox3.Image = final2;//segundo picture box
             pictureBox4.Image = final3;//tercero picture box
+            //Final
+            Bitmap lbpImage = Form1.ConvertToLBP(final3);
+            pictureBox5.Image = lbpImage;
+
+
+
 
         }
 
