@@ -1,5 +1,12 @@
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
+using System.Windows.Forms;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+
+
 
 namespace EscaladeGrises
 {
@@ -12,7 +19,7 @@ namespace EscaladeGrises
             InitializeComponent();
         }
 
-        private void label3_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e) 
         {
 
         }
@@ -62,6 +69,12 @@ namespace EscaladeGrises
 
         }
 
+        private void chartHistogram_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -79,6 +92,8 @@ namespace EscaladeGrises
 
 
         }
+        
+
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -132,11 +147,40 @@ namespace EscaladeGrises
             Bitmap lbpImage = Form1.ConvertToLBP(final3);
             pictureBox5.Image = lbpImage;
 
-
+            CalculateAndShowHistogram(final3);
 
 
         }
+        private void CalculateAndShowHistogram(Bitmap grayImage)
+        {
+            int[] histogram = new int[256];
 
-       
+            
+            for (int y = 0; y < grayImage.Height; y++)
+            {
+                for (int x = 0; x < grayImage.Width; x++)
+                {
+                    Color pixel = grayImage.GetPixel(x, y);
+                    int grayValue = pixel.R;
+                    histogram[grayValue]++;
+                }
+            }
+
+           
+            chartHistogram.Series[0].Points.Clear();
+
+           
+            for (int i = 0; i < histogram.Length; i++)
+            {
+                chartHistogram.Series[0].Points.AddXY(i, histogram[i]);
+            }
+        }
+
+        
+
+
+
+
+
     }
 }

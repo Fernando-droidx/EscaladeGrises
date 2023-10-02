@@ -1,4 +1,6 @@
-﻿namespace EscaladeGrises
+﻿using System.Windows.Forms.DataVisualization.Charting;
+
+namespace EscaladeGrises
 {
     partial class Form1
     {
@@ -28,6 +30,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.LBLtitulo = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -40,11 +45,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.chartHistogram = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistogram)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -167,11 +174,29 @@
             this.pictureBox5.TabIndex = 10;
             this.pictureBox5.TabStop = false;
             // 
+            // chartHistogram
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartHistogram.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartHistogram.Legends.Add(legend1);
+            this.chartHistogram.Location = new System.Drawing.Point(757, 224);
+            this.chartHistogram.Name = "chartHistogram";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartHistogram.Series.Add(series1);
+            this.chartHistogram.Size = new System.Drawing.Size(300, 300);
+            this.chartHistogram.TabIndex = 13;
+            this.chartHistogram.Text = "chart1";
+            this.chartHistogram.Click += new System.EventHandler(this.chartHistogram_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 458);
+            this.ClientSize = new System.Drawing.Size(1154, 586);
+            this.Controls.Add(this.chartHistogram);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.label3);
@@ -191,6 +216,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistogram)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +236,6 @@
         private Label label3;
         private Label label4;
         private PictureBox pictureBox5;
+        private Chart chartHistogram;
     }
 }
