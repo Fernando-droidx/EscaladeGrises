@@ -46,12 +46,15 @@ namespace EscaladeGrises
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.chartHistogram = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.buttonBinarize = new System.Windows.Forms.Button();
+            this.pictureBoxBinarized = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartHistogram)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBinarized)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -191,11 +194,32 @@ namespace EscaladeGrises
             this.chartHistogram.Text = "chart1";
             this.chartHistogram.Click += new System.EventHandler(this.chartHistogram_Click);
             // 
+            // buttonBinarize
+            // 
+            this.buttonBinarize.Location = new System.Drawing.Point(90, 487);
+            this.buttonBinarize.Name = "buttonBinarize";
+            this.buttonBinarize.Size = new System.Drawing.Size(85, 37);
+            this.buttonBinarize.TabIndex = 14;
+            this.buttonBinarize.Text = "Binarizar";
+            this.buttonBinarize.UseVisualStyleBackColor = true;
+            this.buttonBinarize.Click += new System.EventHandler(this.buttonBinarize_Click);
+            // 
+            // pictureBoxBinarized
+            // 
+            this.pictureBoxBinarized.Location = new System.Drawing.Point(508, 463);
+            this.pictureBoxBinarized.Name = "pictureBoxBinarized";
+            this.pictureBoxBinarized.Size = new System.Drawing.Size(188, 111);
+            this.pictureBoxBinarized.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxBinarized.TabIndex = 15;
+            this.pictureBoxBinarized.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1154, 586);
+            this.Controls.Add(this.pictureBoxBinarized);
+            this.Controls.Add(this.buttonBinarize);
             this.Controls.Add(this.chartHistogram);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.pictureBox5);
@@ -217,6 +241,7 @@ namespace EscaladeGrises
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartHistogram)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBinarized)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +262,7 @@ namespace EscaladeGrises
         private Label label4;
         private PictureBox pictureBox5;
         private Chart chartHistogram;
+        private Button buttonBinarize;
+        private PictureBox pictureBoxBinarized;
     }
 }

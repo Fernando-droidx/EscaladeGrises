@@ -92,7 +92,96 @@ namespace EscaladeGrises
 
 
         }
-        
+
+        private int CalculateThresholdUsingOtsuMethod(int[] histogram)
+        {
+            int threshold = 0;
+            double maxVariance = 0.0;
+
+            for (int t = 0; t < 256; t++)
+            {
+                int backgroundPixelCount = 0;
+                int objectPixelCount = 0;
+
+                double sumBackground = 0.0;
+                double sumObject = 0.0;
+
+                for (int i = 0; i < 256; i++)
+                {
+                    if (i <= t)
+                    {
+                        backgroundPixelCount += histogram[i];
+                        sumBackground += i * histogram[i];
+                    }
+                    else
+                    {
+                        objectPixelCount += histogram[i];
+                        sumObject += i * histogram[i];
+                    }
+                }
+
+                double weightBackground = (double)backgroundPixelCount / (backgroundPixelCount + objectPixelCount);
+                double weightObject = (double)objectPixelCount / (backgroundPixelCount + objectPixelCount);
+
+                double meanBackground = sumBackground / backgroundPixelCount;
+                double meanObject = sumObject / objectPixelCount;
+
+                double variance = weightBackground * weightObject * Math.Pow(meanBackground - meanObject, 2);
+
+                if (variance > maxVariance)
+                {
+                    maxVariance = variance;
+                    threshold = t;
+                }
+            }
+
+            return threshold;
+        }
+        private void buttonBinarize_Click(object sender, EventArgs e)
+        {
+            int w = final3.Width, h = final3.Height;
+
+            // Calcula el histograma
+            int[] histogram = new int[256];
+            for (int y = 0; y < h; y++)
+            {
+                for (int x = 0; x < w; x++)
+                {
+                    Color pixel = final3.GetPixel(x, y);
+                    int grayValue = pixel.R;
+                    histogram[grayValue]++;
+                }
+            }
+
+            // Calcula el umbral utilizando el método de los dos picos
+            int threshold = CalculateThresholdUsingOtsuMethod(histogram);
+
+            // Aplica la binarización a la imagen
+            Bitmap binaryImage = ApplyBinarization(final3, threshold);
+
+            // Muestra la imagen binarizada en un PictureBox
+            pictureBoxBinarized.Image = binaryImage;
+        }
+        private Bitmap ApplyBinarization(Bitmap grayImage, int threshold)
+        {
+            Bitmap binaryImage = new Bitmap(grayImage.Width, grayImage.Height);
+
+            for (int y = 0; y < grayImage.Height; y++)
+            {
+                for (int x = 0; x < grayImage.Width; x++)
+                {
+                    Color pixel = grayImage.GetPixel(x, y);
+                    int grayValue = pixel.R;
+
+                    // Aplica la binarización: blanco si es mayor o igual al umbral, negro de lo contrario
+                    Color newColor = (grayValue >= threshold) ? Color.White : Color.Black;
+
+                    binaryImage.SetPixel(x, y, newColor);
+                }
+            }
+
+            return binaryImage;
+        }
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
